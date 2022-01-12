@@ -139,6 +139,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
     pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,mxnet,onnx,pytorch,tensorflow2]==2022.1.0' --find-links=tools/
+    
 
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 
