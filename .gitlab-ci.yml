@@ -12,6 +12,9 @@
 
 docker-build:
   # Use the official docker image.
+
+  tags:
+    - arm64
   image: docker:latest
   stage: build
   services:
