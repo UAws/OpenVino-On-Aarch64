@@ -35,3 +35,4 @@ docker-build:
     - cd build_custom
     - docker build -t "$CI_REGISTRY_IMAGE${tag}" --build-arg OPENVINO_BRANCH="releases/2021/4" OMZ_BRANCH="releases/2021/4" BUILD_OPENCV_CONTRIB="yes" .
     - docker push "$CI_REGISTRY_IMAGE${tag}"
+    
