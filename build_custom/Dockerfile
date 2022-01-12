@@ -227,7 +227,18 @@ RUN apt-get update; \
         udev \
         sudo \
         gdb \
-        tzdata; \
+        tzdata \
+        libva-dev \
+        libgtk-3-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libavutil-dev \
+        libswscale-dev \
+        libavresample-dev \
+        libgstreamer1.0-dev \
+        libgstreamer-plugins-base1.0-dev \
+        libgstreamer-plugins-good1.0-dev \
+        libgstreamer-plugins-bad1.0-dev; \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR ${INTEL_OPENVINO_DIR}
