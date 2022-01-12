@@ -215,8 +215,7 @@ LABEL vendor="Intel Corporation"
 
 ENV INTEL_OPENVINO_DIR="/opt/intel/openvino"
 
-COPY --from=opencv /opt/intel/repo/openvino/build/install ${INTEL_OPENVINO_DIR}
-COPY --from=opencv /opt/intel/repo/openvino/thirdparty/open_model_zoo/demos ${INTEL_OPENVINO_DIR}/demos
+COPY --from=opencv ${INTEL_OPENVINO_DIR} ${INTEL_OPENVINO_DIR}
 COPY --from=opencv /tmp/libusb-1.0.22 /opt/libusb-1.0.22
 
 
