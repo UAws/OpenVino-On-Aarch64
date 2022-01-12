@@ -15,6 +15,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends curl tzdata ca-certificates && \
     rm -rf /var/lib/apt/lists/* && \
     uname -m 
+    
 
 # get product from URL
 ARG package_url
