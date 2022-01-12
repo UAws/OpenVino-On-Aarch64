@@ -39,8 +39,9 @@ RUN chmod +x install_build_dependencies.sh; \
 
 ARG OCL_VERSION="19.41.14441"
 
-RUN chmod +x scripts/install_dependencies/install_NEO_OCL_driver.sh; \
-    ./scripts/install_dependencies/install_NEO_OCL_driver.sh -y --no_numa -d ${OCL_VERSION}
+# Temporally disable the OCL, as there are some of AMD only packages existed inside install_NEO_OCL_driver.sh
+#RUN chmod +x scripts/install_dependencies/install_NEO_OCL_driver.sh; \
+#    ./scripts/install_dependencies/install_NEO_OCL_driver.sh -y --no_numa -d ${OCL_VERSION}
 
 # hadolint ignore=DL3013
 RUN chmod +x scripts/install_dependencies/install_openvino_dependencies.sh; \
@@ -118,8 +119,8 @@ RUN chmod +x install_dependencies/install_openvino_dependencies.sh; \
 
 ARG OCL_VERSION="19.41.14441"
 
-RUN chmod +x install_dependencies/install_NEO_OCL_driver.sh; \
-    ./install_dependencies/install_NEO_OCL_driver.sh -y --no_numa -d ${OCL_VERSION}
+#RUN chmod +x install_dependencies/install_NEO_OCL_driver.sh; \
+#    ./install_dependencies/install_NEO_OCL_driver.sh -y --no_numa -d ${OCL_VERSION}
 
 WORKDIR /opt/libusb-1.0.22
 RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
