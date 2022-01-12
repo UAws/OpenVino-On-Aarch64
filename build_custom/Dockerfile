@@ -218,7 +218,6 @@ ENV INTEL_OPENVINO_DIR="/opt/intel/openvino"
 COPY --from=opencv ${INTEL_OPENVINO_DIR} ${INTEL_OPENVINO_DIR}
 COPY --from=opencv /opt/libusb-1.0.22 /opt/libusb-1.0.22
 
-
 # hadolint ignore=DL3008
 RUN apt-get update; \
     DEBIAN_FRONTEND=noninteractive \
