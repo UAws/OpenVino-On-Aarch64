@@ -261,5 +261,6 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
 
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 
+
 WORKDIR ${INTEL_OPENVINO_DIR}
 CMD ["/bin/bash"]
