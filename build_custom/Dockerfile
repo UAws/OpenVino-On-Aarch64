@@ -206,3 +206,60 @@ RUN mkdir "${INTEL_OPENVINO_DIR}/extras"; \
 
 WORKDIR ${INTEL_OPENVINO_DIR}
 CMD ["/bin/bash"]
+
+
+FROM ubuntu:20.04 AS final_openvino
+
+LABEL description="This is the dev image for Intel(R) Distribution of OpenVINO(TM) toolkit on Ubuntu 20.04 LTS"
+LABEL vendor="Intel Corporation"
+
+ENV INTEL_OPENVINO_DIR="/opt/intel/openvino"
+
+COPY --from=build_openvino /opt/intel/repo/openvino/build/install ${INTEL_OPENVINO_DIR}
+COPY --from=build_openvino /opt/intel/repo/openvino/thirdparty/open_model_zoo/demos ${INTEL_OPENVINO_DIR}/demos
+COPY --from=build_openvino /tmp/libusb-1.0.22 /opt/libusb-1.0.22
+
+
+# hadolint ignore=DL3008
+RUN apt-get update; \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends \
+        apt-utils \
+        wget \
+        udev \
+        sudo \
+        gdb \
+        tzdata; \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR ${INTEL_OPENVINO_DIR}
+RUN chmod +x install_dependencies/install_openvino_dependencies.sh; \
+    ./install_dependencies/install_openvino_dependencies.sh -y -c=python -c=dev
+
+ARG OCL_VERSION="19.41.14441"
+
+#RUN chmod +x install_dependencies/install_NEO_OCL_driver.sh; \
+#    ./install_dependencies/install_NEO_OCL_driver.sh -y --no_numa -d ${OCL_VERSION}
+
+WORKDIR /opt/libusb-1.0.22
+RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
+    mkdir -p /usr/local/include/libusb-1.0; \
+    install -c -m 644 libusb/libusb.h /usr/local/include/libusb-1.0; \
+    mkdir -p /usr/local/lib/pkgconfig; \
+    install -c -m 644 libusb-1.0.pc /usr/local/lib/pkgconfig
+
+WORKDIR ${INTEL_OPENVINO_DIR}
+RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
+    ./install_dependencies/install_NCS_udev_rules.sh
+
+# hadolint ignore=DL3013
+RUN python3 -m pip install --no-cache-dir --upgrade pip; \
+    python3 -m pip install --no-cache-dir -r python/python3.8/requirements.txt; \
+    python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
+    pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
+    python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
+
+RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
+
+WORKDIR ${INTEL_OPENVINO_DIR}
+CMD ["/bin/bash"]
