@@ -11,6 +11,7 @@
 
 2. Build OpenVino on Aarch64 Image on Cloud VM, the Oracle Cloud has been used. The VM is leveraged by Oracle Cloud Always Free Tier.
    The VM have 4 A1 CPU (Arm), 24 GB memory, 200 GB Disk.
+   
    https://www.oracle.com/au/cloud/free/
 
    The Runner configures with docker executor and use DIND (docker in docker typology) to build image.
