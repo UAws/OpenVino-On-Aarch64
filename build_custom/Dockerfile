@@ -263,6 +263,7 @@ RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
 
 WORKDIR ${INTEL_OPENVINO_DIR}
 RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
+    /lib/systemd/systemd-udevd --daemon; \
     ./install_dependencies/install_NCS_udev_rules.sh
 
 # hadolint ignore=DL3013
