@@ -2,9 +2,26 @@
 
 ### There is a project to build OpenVino on Ubuntu 20.04 LTS in Aarch64 Architecture.
 
-## Infrastructure Diagram
+## Infrastructure Flow Diagram
 
-![OpenVino-on-Aarch64-Page-2.drawio (1)](https://minio.llycloud.com/image/uPic/image-202201144c7hlR.png)
+![OpenVino-on-Aarch64-Page-2.drawio (2)](https://minio.llycloud.com/image/uPic/image-20220114pUqDFC.png)
+
+1. Commit the Infrastructure Code to Gitalb Instance in order to build OpenVino on Aarch64.
+   The Dockerfile for build OenVino On Aarch64 is modified and captured from [OpenVino Docker-CI official Repository](https://github.com/openvinotoolkit/docker_ci/tree/master/dockerfiles/ubuntu20/build_custom)
+
+2. Build OpenVino on Aarch64 Image on Cloud VM, the Oracle Cloud has been used. The VM is leveraged by Oracle Cloud Always Free Tier.
+   The VM have 4 A1 CPU (Arm), 24 GB memory, 200 GB Disk.
+   [https://www.oracle.com/au/cloud/free/
+
+   ](https://www.oracle.com/au/cloud/free/)The Runner configures with docker executor and use DIND (docker in docker typology) to build image.
+   [https://docs.gitlab.com/runner/executors/docker.html ](https://docs.gitlab.com/runner/executors/docker.html)
+
+3. Push the OpenVino on Aarch64 image to the self-hosted [gitlab container registry](https://docs.gitlab.com/ee/user/packages/container_registry/).
+
+4. Pull the image from gitlab container registry.
+   As the project in state of internal, only authorized user could pull this imnage
+
+5. Run the image as a container and perform the Openvino object detection operations
 
 ## Getting Start
 
