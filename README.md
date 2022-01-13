@@ -1,6 +1,10 @@
 # OpenVino-on-Aarch64
 
-### There is a project to build OpenVino on Ubuntu 20.04 LTS in Aarch64 Architecture.
+### There is a project to build OpenVino on Ubuntu 20.04 LTS in Aarch64 Architecture docker image. 
+
+### The performance of docker is closed to native in various aspects e.g. CPU, Disk and the docker adapted flexibility while building image on huge VM and running on the edges. 
+
+https://dominoweb.draco.res.ibm.com/reports/rc25482.pdf
 
 ## Infrastructure Flow Diagram
 
