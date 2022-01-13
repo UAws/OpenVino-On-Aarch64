@@ -5,3 +5,6 @@
 -D NGRAPH_DEBUG_ENABLE=ON
 -D PYTHON_EXECUTABLE=/usr/bin/python3
 -D ENABLE_WHEEL=ON
+-D PYTHON_LIBRARY=/usr/lib/aarch64-linux-gnu/libpython
+3.8.so
+-D PYTHON_INCLUDE_DIR=/usr/include/python3.8
