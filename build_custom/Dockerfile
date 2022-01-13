@@ -223,6 +223,10 @@ RUN apt-get update; \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
         apt-utils \
+        git \
+        vim \
+        v4l-utils \
+        x11-apps \
         wget \
         udev \
         sudo \
@@ -259,7 +263,11 @@ RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
 
 WORKDIR ${INTEL_OPENVINO_DIR}
 RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
-    ./install_dependencies/install_NCS_udev_rules.sh
+    ./install_dependencies/install_NCS_udev_rules.sh; \
+    ./demos/build_demos.sh; \
+    cd dmoes/security_barrier_camera_demo/cpp; \
+    omz_downloader --list models.lst; \
+    omz_converter --list models.lst; 
 
 # hadolint ignore=DL3013
 RUN python3 -m pip install --no-cache-dir --upgrade pip; \
