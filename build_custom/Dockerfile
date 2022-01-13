@@ -223,6 +223,10 @@ RUN apt-get update; \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --no-install-recommends \
         apt-utils \
+        git \
+        vim \
+        v4l-utils \
+        x11-apps \
         wget \
         udev \
         sudo \
@@ -269,6 +273,12 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
 
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
+
+WORKDIR ${INTEL_OPENVINO_DIR}
+RUN ./demos/build_demos.sh; \
+    cd demos/security_barrier_camera_demo/cpp; \
+    omz_downloader --list models.lst; \
+    omz_converter --list models.lst
 
 
 WORKDIR ${INTEL_OPENVINO_DIR}
