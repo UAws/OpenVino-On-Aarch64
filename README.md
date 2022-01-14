@@ -65,6 +65,18 @@ sudo chmod 777 /var/run/docker.sock
 
 #### STEP 3 : Pull Docker image
 
+**For public access**
+
+```sh
+export OpenVino-on-Aarch64-Image=ghcr.io/uaws/openvino-on-aarch64:latest
+```
+
+**For Internal access**
+
+```sh
+export OpenVino-on-Aarch64-Image=gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64:latest
+```
+
 You need to make sure you have the access to the self-hosted gitlab container registry. Then Login to the registry.
 
 https://gitlab.dev.vmv.re/AkideLiu/openvino-on-aarch64/container_registry
@@ -76,7 +88,7 @@ sudo docker login gitlab-registry.dev.vmv.re
 Pull the latest version image
 
 ```sh
-sudo docker pull gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64:latest
+sudo docker pull $OpenVino-on-Aarch64-Image
 ```
 
 #### STEP 4 : Run Docker image
@@ -89,7 +101,7 @@ sudo docker run -it \
    -e DISPLAY=$DISPLAY \
    --device-cgroup-rule='c 189:* rmw' \
    -v /dev/bus/usb:/dev/bus/usb  \
-   -d --net=host gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64
+   -d --net=host $OpenVino-on-Aarch64-Image
 ```
 
 - `-it` : For interactive processes (like a shell), you must use `-i -t` together in order to allocate a tty for the container process. `-i -t` is often written `-it` as you’ll see in later examples
