@@ -43,6 +43,8 @@ docker-build:
     - docker push "$CI_REGISTRY_IMAGE${tag}"
     # "push github ghcr.io "
     - docker push "$GITHUB_IMAGE:$CI_COMMIT_SHA"
+    - docker push "$GITHUB_IMAGE:$CI_COMMIT_SHA"
+    
     
     
     
