@@ -34,13 +34,11 @@ docker-build:
         echo "Running on branch '$CI_COMMIT_BRANCH': tag = $tag"
       fi
     - cd build_custom
-    - docker build -f ./Dockerfile -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" --build-arg OPENVINO_BRANCH="dev_11012022" --build-arg BUILD_OPENCV_CONTRIB="yes" .
+    - docker build -f ./Dockerfile -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" -t "$CI_REGISTRY_IMAGE:${tag}" -t "$GITHUB_IMAGE:$CI_COMMIT_SHA" --build-arg OPENVINO_BRANCH="dev_11012022" --build-arg BUILD_OPENCV_CONTRIB="yes" .
     # "push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-    - docker build --cache-from "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" -t $CI_REGISTRY_IMAGE:latest .
-    # "push $CI_REGISTRY_IMAGE:latest"
-    - docker push "$CI_REGISTRY_IMAGE:latest"
-    - docker build --cache-from "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" -t "$GITHUB_IMAGE:$CI_COMMIT_SHA" .
+    # "push $CI_REGISTRY_IMAGE:${tag}"
+    - docker push "$CI_REGISTRY_IMAGE:${tag}"
     # "push github ghcr.io"
     - docker push "$GITHUB_IMAGE:$CI_COMMIT_SHA"
     
