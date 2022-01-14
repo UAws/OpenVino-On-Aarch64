@@ -82,7 +82,14 @@ sudo docker pull gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64:latest
 #### STEP 4 : Run Docker image
 
 ```sh
-sudo docker run -it --privileged -v /dev/video0:/dev/video0  -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY --device-cgroup-rule='c 189:* rmw' -v /dev/bus/usb:/dev/bus/usb  -d --net=host gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64
+sudo docker run -it \
+   --privileged \
+   -v /dev/video0:/dev/video0  \
+   -v /tmp/.X11-unix:/tmp/.X11-unix \
+   -e DISPLAY=$DISPLAY \
+   --device-cgroup-rule='c 189:* rmw' \
+   -v /dev/bus/usb:/dev/bus/usb  \
+   -d --net=host gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64
 ```
 
 - `-it` : For interactive processes (like a shell), you must use `-i -t` together in order to allocate a tty for the container process. `-i -t` is often written `-it` as you’ll see in later examples
@@ -123,7 +130,12 @@ Run the pre-build Open Model Zoo demo
 ```sh
 cd ~/omz_demos_build/aarch64/Release/
 
-./security_barrier_camera_demo -d MYRIAD -d_va MYRIAD -d_lpr MYRIAD -nc 1 -m /opt/intel/openvino/demos/security_barrier_camera_demo/cpp/intel/vehicle-license-plate-detection-barrier-0106/FP16/vehicle-license-plate-detection-barrier-0106.xml -m_lpr /opt/intel/openvino/demos/security_barrier_camera_demo/cpp/intel/license-plate-recognition-barrier-0001/FP16/license-plate-recognition-barrier-0001.xml -m_va /opt/intel/openvino/demos/security_barrier_camera_demo/cpp/intel/vehicle-attributes-recognition-barrier-0039/FP16/vehicle-attributes-recognition-barrier-0039.xml
+./security_barrier_camera_demo \
+   -d MYRIAD -d_va MYRIAD -d_lpr MYRIAD -nc 1 \
+   -m /opt/intel/openvino/demos/security_barrier_camera_demo/cpp/intel/vehicle-license-plate-detection-barrier-0106/FP16/vehicle-license-plate-detection-barrier-0106.xml \
+   -m_lpr /opt/intel/openvino/demos/security_barrier_camera_demo/cpp/intel/license-plate-recognition-barrier-0001/FP16/license-plate-recognition-barrier-0001.xml  \
+   -m_va /opt/intel/openvino/demos/security_barrier_camera_demo/cpp/intel/vehicle-attributes-recognition-barrier-0039/FP16/vehicle-attributes-recognition-barrier-0039.xml
+
 ```
 
 https://github.com/openvinotoolkit/open_model_zoo/tree/master/demos/security_barrier_camera_demo/cpp
