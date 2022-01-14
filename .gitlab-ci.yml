@@ -37,6 +37,7 @@ docker-build:
     - docker build -f ./Dockerfile -t "$CI_REGISTRY_IMAGE${tag}" --build-arg OPENVINO_BRANCH="dev_11012022" --build-arg BUILD_OPENCV_CONTRIB="yes" .
     - docker tag "$CI_REGISTRY_IMAGE${tag}" "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
     - docker tag "$CI_REGISTRY_IMAGE${tag}" "$GITHUB_IMAGE:$CI_COMMIT_SHA"
+    - docker tag "$CI_REGISTRY_IMAGE${tag}" "$GITHUB_IMAGE${tag}"
     # "push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
     # "push $CI_REGISTRY_IMAGE:${tag}"
