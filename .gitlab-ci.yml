@@ -37,9 +37,12 @@ docker-build:
     - docker build -f ./Dockerfile -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" -t "$CI_REGISTRY_IMAGE:${tag}" -t "$GITHUB_IMAGE:$CI_COMMIT_SHA" --build-arg OPENVINO_BRANCH="dev_11012022" --build-arg BUILD_OPENCV_CONTRIB="yes" .
     # "push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
-    # "push $CI_REGISTRY_IMAGE:${tag}"
     - docker push "$CI_REGISTRY_IMAGE:${tag}"
     # "push github ghcr.io"
+    # "push $CI_REGISTRY_IMAGE:${tag}"
+    - docker push "$CI_REGISTRY_IMAGE:${tag}"
+    # "push github ghcr.io "
+    - docker push "$GITHUB_IMAGE:$CI_COMMIT_SHA"
     - docker push "$GITHUB_IMAGE:$CI_COMMIT_SHA"
     
     
