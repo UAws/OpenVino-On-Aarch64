@@ -282,7 +282,7 @@ RUN ./demos/build_demos.sh; \
     omz_converter --list models.lst; \
     cd ${INTEL_OPENVINO_DIR}/demos/object_detection_demo/python; \
     omz_downloader --list models.lst; \
-    omz_converter --list models.lst \
+    omz_converter --list models.lst 
 
 
 WORKDIR ${INTEL_OPENVINO_DIR}
