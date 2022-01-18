@@ -1,8 +1,8 @@
 # OpenVino-on-Aarch64
 
-### There is a project to build OpenVino on Ubuntu 20.04 LTS in Aarch64 Architecture docker image. 
+### This is an automated continuous intergration pipeline which defines the process to build OpenVino 2021.4+ ARM64 docker image based on Ubuntu 20.04 LTS system in Aarch64 Architecture.
 
-### The performance of docker is closed to native in various aspects e.g. CPU, Disk and the docker adapted flexibility while building image on huge VM and running on the edges. 
+### The performance of docker is closed to native in various aspects e.g. CPU, Disk .and the docker adapted flexibility while building image on huge VM and running on the edges. 
 
 https://dominoweb.draco.res.ibm.com/reports/rc25482.pdf
 
@@ -24,8 +24,9 @@ https://dominoweb.draco.res.ibm.com/reports/rc25482.pdf
 3. Push the OpenVino on Aarch64 image to the self-hosted [gitlab container registry](https://docs.gitlab.com/ee/user/packages/container_registry/).
 
 4. Pull the image from gitlab container registry on edge device (Raspberry Pi).
-   As the project in state of internal, only authorized user could pull this imnage
-
+   ~~As the project in state of internal, only authorized user could pull this image.~~
+   As approved by higher management, all of the procedures in this repositories is under general purpose practice, therefore the visibility of this repository has been changed to public. All of user could access pre-built image from ghcr.io (Github public container registry)
+   
 5. Run the image as a container on edge device (Raspberry Pi) and perform the Openvino object detection operations.
 
 ## Getting Start
@@ -71,7 +72,8 @@ sudo chmod 777 /var/run/docker.sock
 export OpenVino-on-Aarch64-Image=ghcr.io/uaws/openvino-on-aarch64:latest
 ```
 
-**For Internal access**
+<details>
+<summary>For Internal access</summary>
 
 ```sh
 export OpenVino-on-Aarch64-Image=gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64:latest
@@ -81,9 +83,11 @@ You need to make sure you have the access to the self-hosted gitlab container re
 
 https://gitlab.dev.vmv.re/AkideLiu/openvino-on-aarch64/container_registry
 
-```shell
+```sh
 sudo docker login gitlab-registry.dev.vmv.re
 ```
+
+</details>
 
 Pull the latest version image
 

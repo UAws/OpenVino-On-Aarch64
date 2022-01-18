@@ -12,7 +12,10 @@
 
 docker-build:
   # Use the official docker image.
-
+  rules:
+    - changes:
+        - "*.md"
+      when: never
   tags:
     - arm64
   image: docker:latest
@@ -21,7 +24,7 @@ docker-build:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - echo $GITHUB_CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+    - docker login -u "$CI_REGISTRY_USER" -p "$GITHUB_CR_PAT" ghcr.io
   # Default branch leaves tag empty (= latest tag)
   # All other branches are tagged with the escaped branch name (commit ref slug)
   script:
