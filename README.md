@@ -1,6 +1,12 @@
 # OpenVino-on-Aarch64
 
-### This is an automated continuous intergration pipeline which defines the process to build OpenVino 2021.4+ ARM64 docker image based on Ubuntu 20.04 LTS system in Aarch64 Architecture.
+## Abstraction
+
+### Intel OpenVino is a common toolset in the computer vision and machine learning field which provides straightforward and well-structured inference API and optimization tools.
+
+### While the existing issue is that the intel does not happy to publish the ARM64 pre-built OpenVino packages for some unknown reason. 
+
+### The motivation of this workaround is createing an automated continuous integration pipeline which defines the process to build OpenVino 2021.4+ ARM64 Docker image based on Ubuntu 20.04 LTS system in Aarch64 Architecture.
 
 ### The performance of docker is closed to native in various aspects e.g. CPU, Disk .and the docker adapted flexibility while building image on huge VM and running on the edges. 
 
