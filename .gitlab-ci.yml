@@ -16,6 +16,8 @@ docker-build:
     - changes:
         - "*.md"
       when: never
+      
+    - when: always
   tags:
     - arm64
   image: docker:latest
