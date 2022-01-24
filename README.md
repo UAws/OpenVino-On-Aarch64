@@ -1,6 +1,12 @@
 # OpenVino-on-Aarch64
 
-### This is an automated continuous intergration pipeline which defines the process to build OpenVino 2021.4+ ARM64 docker image based on Ubuntu 20.04 LTS system in Aarch64 Architecture.
+## Abstraction
+
+### Intel OpenVino is a common toolset in the computer vision and machine learning field which provides straightforward and well-structured inference API and optimization tools.
+
+### While the existing issue is that the intel does not happy to publish the ARM64 pre-built OpenVino packages for some unknown reason. 
+
+### The motivation of this workaround is createing an automated continuous integration pipeline which defines the process to build OpenVino 2021.4+ ARM64 Docker image based on Ubuntu 20.04 LTS system in Aarch64 Architecture.
 
 ### The performance of docker is closed to native in various aspects e.g. CPU, Disk .and the docker adapted flexibility while building image on huge VM and running on the edges. 
 
@@ -69,14 +75,14 @@ sudo chmod 777 /var/run/docker.sock
 **For public access**
 
 ```sh
-export OpenVino-on-Aarch64-Image=ghcr.io/uaws/openvino-on-aarch64:latest
+export OpenVino_on_Aarch64_Image=ghcr.io/uaws/openvino-on-aarch64:latest
 ```
 
 <details>
 <summary>For Internal access</summary>
 
 ```sh
-export OpenVino-on-Aarch64-Image=gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64:latest
+export OpenVino_on_Aarch64_Image=gitlab-registry.dev.vmv.re/akideliu/openvino-on-aarch64:latest
 ```
 
 You need to make sure you have the access to the self-hosted gitlab container registry. Then Login to the registry.
@@ -92,7 +98,7 @@ sudo docker login gitlab-registry.dev.vmv.re
 Pull the latest version image
 
 ```sh
-sudo docker pull $OpenVino-on-Aarch64-Image
+sudo docker pull $OpenVino_on_Aarch64_Image
 ```
 
 #### STEP 4 : Run Docker image
@@ -105,7 +111,7 @@ sudo docker run -it \
    -e DISPLAY=$DISPLAY \
    --device-cgroup-rule='c 189:* rmw' \
    -v /dev/bus/usb:/dev/bus/usb  \
-   -d --net=host $OpenVino-on-Aarch64-Image
+   -d --net=host $OpenVino_on_Aarch64_Image
 ```
 
 - `-it` : For interactive processes (like a shell), you must use `-i -t` together in order to allocate a tty for the container process. `-i -t` is often written `-it` as you’ll see in later examples
