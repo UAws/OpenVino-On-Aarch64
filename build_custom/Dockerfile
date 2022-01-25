@@ -240,6 +240,8 @@ RUN apt-get update; \
         libswscale-dev \
         libavresample-dev \
         libgstreamer1.0-dev \
+        mesa-utils \
+        libgl1-mesa-glx
         libgstreamer-plugins-base1.0-dev \
         libgstreamer-plugins-good1.0-dev \
         libgstreamer-plugins-bad1.0-dev; \
@@ -264,7 +266,10 @@ RUN ./libtool --mode=install install -c libusb/libusb-1.0.la /usr/local/lib/; \
 WORKDIR ${INTEL_OPENVINO_DIR}
 RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
     /lib/systemd/systemd-udevd --daemon; \
-    ./install_dependencies/install_NCS_udev_rules.sh
+    ./install_dependencies/install_NCS_udev_rules.sh; \
+    echo " /lib/systemd/systemd-udevd --daemon " >> ~/.bashrc; \
+    echo " /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh" >> ~/.bashrc; \
+    echo " export LIBGL_ALWAYS_INDIRECT=1 " >> ~/.bashrc; \
 
 # hadolint ignore=DL3013
 RUN python3 -m pip install --no-cache-dir --upgrade pip; \
