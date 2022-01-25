@@ -269,7 +269,7 @@ RUN chmod +x install_dependencies/install_NCS_udev_rules.sh; \
     ./install_dependencies/install_NCS_udev_rules.sh; \
     echo " /lib/systemd/systemd-udevd --daemon " >> ~/.bashrc; \
     echo " /opt/intel/openvino/install_dependencies/install_NCS_udev_rules.sh" >> ~/.bashrc; \
-    echo " export LIBGL_ALWAYS_INDIRECT=1 " >> ~/.bashrc; \
+    echo " export LIBGL_ALWAYS_INDIRECT=1 " >> ~/.bashrc
 
 # hadolint ignore=DL3013
 RUN python3 -m pip install --no-cache-dir --upgrade pip; \
