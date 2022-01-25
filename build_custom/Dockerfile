@@ -241,7 +241,7 @@ RUN apt-get update; \
         libavresample-dev \
         libgstreamer1.0-dev \
         mesa-utils \
-        libgl1-mesa-glx
+        libgl1-mesa-glx \
         libgstreamer-plugins-base1.0-dev \
         libgstreamer-plugins-good1.0-dev \
         libgstreamer-plugins-bad1.0-dev; \
