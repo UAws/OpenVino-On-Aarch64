@@ -103,6 +103,8 @@ sudo docker pull $OpenVino_on_Aarch64_Image
 
 #### STEP 4 : Run Docker image
 
+#### Pre-requirements: you need set proper x11 forwarding on the both Client and edge system in order to retrieve the GUI functionality, and `xauth` packages needs to be installed via `apt` or `brew` 
+
 ```sh
 sudo docker run -it \
    --privileged \
@@ -111,6 +113,7 @@ sudo docker run -it \
    -e DISPLAY=$DISPLAY \
    --device-cgroup-rule='c 189:* rmw' \
    -v /dev/bus/usb:/dev/bus/usb  \
+   -v $HOME/.Xauthority:/root/.Xauthority \
    -d --net=host $OpenVino_on_Aarch64_Image
 ```
 
@@ -120,6 +123,7 @@ sudo docker run -it \
 - `-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY` : x11 forwarding application docker support. This setting will allow to display graphic user interface to view the real time object detection.
 - `-device-cgroup-rule='c 189:* rmw'` : NCS2 rules
 - `-v /dev/bus/usb:/dev/bus/usb` mapping the hosting usb device (NCS2) to container
+- `-v $HOME/.Xauthority:/root/.Xauthority` mapping the Xauthority from edge device into docker
 - `-d` run on daemon
 - `--net=host` support x11 for docker
 
