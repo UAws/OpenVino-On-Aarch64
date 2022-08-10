@@ -138,7 +138,6 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir -r python/python3.8/requirements.txt; \
     python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
     pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
-    pip install numpy --upgrade; \
     pip install h5py; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
     
@@ -280,7 +279,6 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir -r python/python3.8/requirements.txt; \
     python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
     pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
-    pip install numpy --upgrade; \
     pip install h5py; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
 
