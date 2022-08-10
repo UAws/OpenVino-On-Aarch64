@@ -281,4 +281,10 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 
 WORKDIR ${INTEL_OPENVINO_DIR}
+RUN ./demos/build_demos.sh; \
+    cd demos/object_detection_demo/python; \
+    omz_downloader --list models.lst; \
+    omz_converter --list models.lst
+
+WORKDIR ${INTEL_OPENVINO_DIR}
 CMD ["/bin/bash"]
