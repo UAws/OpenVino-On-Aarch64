@@ -138,9 +138,8 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir -r python/python3.8/requirements.txt; \
     python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
     pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
-    pip install h5py; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
-    
+
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 
 CMD ["/bin/bash"]
@@ -158,7 +157,6 @@ RUN apt-get update; \
         git \
         libva-dev \
         libgtk-3-dev \
-        libhdf5\
         libavcodec-dev \
         libavformat-dev \
         libavutil-dev \
@@ -236,7 +234,6 @@ RUN apt-get update; \
         tzdata \
         libva-dev \
         libgtk-3-dev \
-        libhdf5 \
         libavcodec-dev \
         libavformat-dev \
         libavutil-dev \
@@ -279,16 +276,9 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir -r python/python3.8/requirements.txt; \
     python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
     pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
-    pip install h5py; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
 
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
-
-WORKDIR ${INTEL_OPENVINO_DIR}
-RUN ./demos/build_demos.sh; \
-    cd demos/object_detection_demo/python; \
-    omz_downloader --list models.lst; \
-    omz_converter --list models.lst
 
 WORKDIR ${INTEL_OPENVINO_DIR}
 CMD ["/bin/bash"]
