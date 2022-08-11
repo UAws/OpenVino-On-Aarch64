@@ -283,7 +283,7 @@ RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 WORKDIR ${INTEL_OPENVINO_DIR}
 RUN cd demos/security_barrier_camera_demo/cpp; \
     omz_downloader --list models.lst; \
-    omz_converter --list models.lst \
+    omz_converter --list models.lst;
 
 WORKDIR ${INTEL_OPENVINO_DIR}
 CMD ["/bin/bash"]
