@@ -139,7 +139,7 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
     python3 -m pip install --no-cache-dir openvino --find-links=tools/ ; \
     pip install tensorflow-aarch64~=2.5.0 -f https://tf.kmtea.eu/whl/stable.html ; \
     python3 -m pip install --no-cache-dir 'openvino_dev[caffe,kaldi,onnx,pytorch]==2022.1.0' --find-links=tools/
-
+    
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 
 CMD ["/bin/bash"]
@@ -281,9 +281,11 @@ RUN python3 -m pip install --no-cache-dir --upgrade pip; \
 RUN printf "\nsource \${INTEL_OPENVINO_DIR}/setupvars.sh\n" >> /root/.bashrc
 
 WORKDIR ${INTEL_OPENVINO_DIR}
-RUN cd demos/security_barrier_camera_demo/cpp; \
+RUN ./demos/build_demos.sh; \
+    cd demos/security_barrier_camera_demo/cpp; \
     omz_downloader --list models.lst; \
-    omz_converter --list models.lst;
+    omz_converter --list models.lst
+
 
 WORKDIR ${INTEL_OPENVINO_DIR}
 CMD ["/bin/bash"]
